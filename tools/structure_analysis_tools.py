@@ -334,7 +334,8 @@ def create_aa_network(pdb_id, rel_list, selected_positions, cutoff, pdbs_path):
 
 
 def create_perturbation_network(
-    pdb_id, pdb_id_ref, threshold, rel_list, selected_positions, cutoff, pdbs_path
+    pdb_id, pdb_id_ref, threshold, rel_list, selected_positions, cutoff, pdbs_path, color_negative_edge,
+    color_positive_edge
 ):
 
     net1, labels = create_aa_network(
@@ -366,24 +367,24 @@ def create_perturbation_network(
         wij2 = net2.get_edge_data(u, v)["weight"]
         deltawij = wij2 - wij1
         if deltawij > threshold:
-            color = "green"
+            color = color_positive_edge
             net.add_edge(u, v, weight=abs(deltawij))
             edge_colors[(u, v)] = color
         elif deltawij < -threshold:
-            color = "red"
+            color = color_negative_edge
             net.add_edge(u, v, weight=abs(deltawij))
             edge_colors[(u, v)] = color
 
     for u, v in edges_1only:
         wij = net1.get_edge_data(u, v)["weight"]
-        color = "red"
+        color = color_negative_edge
         if wij > threshold:
             net.add_edge(u, v, weight=wij)
             edge_colors[(u, v)] = color
 
     for u, v in edges_2only:
         wij = net2.get_edge_data(u, v)["weight"]
-        color = "green"
+        color = color_positive_edge
         if wij > threshold:
             net.add_edge(u, v, weight=wij)
             edge_colors[(u, v)] = color

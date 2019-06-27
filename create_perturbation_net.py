@@ -54,6 +54,18 @@ import click
     help="path of folder containing the pdbs.",
     show_default=True
 )
+@click.option(
+    "--color_negative_edge",
+    default="red",
+    help="color of negative edges (wij_ref > wij).",
+    show_default=True
+)
+@click.option(
+    "--color_positive_edge",
+    default="green",
+    help="color of positive edges (wij > wij_ref).",
+    show_default=True
+)
 def create_net(
     pdb_id,
     pdb_id_ref,
@@ -65,6 +77,8 @@ def create_net(
     output,
     output_folder,
     pdbs_path,
+    color_negative_edge,
+    color_positive_edge
 ):
 
     if dim == "all":
@@ -87,6 +101,8 @@ def create_net(
         selected_positions=selected_positions,
         cutoff=cutoff,
         pdbs_path=pdbs_path,
+        color_negative_edge=color_negative_edge,
+        color_positive_edge=color_positive_edge
     )
 
     nx.relabel_nodes(net, labels, copy=False)

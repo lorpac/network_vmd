@@ -35,26 +35,30 @@
         Usage: create_perturbation_net.py [OPTIONS] PDB_ID PDB_ID_REF
 
         Options:
-        --threshold INTEGER        difference threshold do connect residues in the
-                            perturbation network  [default: 0]
-        --select_positions TEXT    if True, create a list of sequence positions to
+        --threshold INTEGER         difference threshold do connect residues in the
+                                    perturbation network  [default: 0]
+        --select_positions TEXT     if True, create a list of sequence positions to
                                     consider (from --start and --stop options)
                                     [default: False]
-        --range_positions TEXT...  if not None and --select_positions is True, first
-                                    and last positions of sequence to consider. If
-                                    None or --select_positions is False, consider the
-                                    whole sequence.
-        --dim TEXT                 dimensions to consider (1D, 2D, 3D, 4D, 3-4D, or
+        --range_positions TEXT...   if not None and --select_positions is True,
+                                    first and last positions of sequence to
+                                    consider. If None or --select_positions is
+                                    False, consider the whole sequence.
+        --dim TEXT                  dimensions to consider (1D, 2D, 3D, 4D, 3-4D, or
                                     all).  [default: all]
-        --cutoff INTEGER           cutoff threshold for the connection of nodes in
+        --cutoff INTEGER            cutoff threshold for the connection of nodes in
                                     the amino acid network.  [default: 5]
-        --output TEXT              output file name. If None, the output is
+        --output TEXT               output file name. If None, the output is
                                     'netdimpdb_id.p'.
-        --output_folder TEXT       output folder. Default is 'networks'.  [default:
+        --output_folder TEXT        output folder. Default is 'networks'.  [default:
                                     networks]
-        --pdbs_path TEXT           path of folder containing the pdbs.  [default:
+        --pdbs_path TEXT            path of folder containing the pdbs.  [default:
                                     pdbs]
-        --help                     Show this message and exit.
+        --color_negative_edge TEXT  color of negative edges (wij_ref > wij).
+                                    [default: red]
+        --color_positive_edge TEXT  color of positive edges (wij > wij_ref).
+                                    [default: green]
+        --help                      Show this message and exit.
         ```
 
         Example:
