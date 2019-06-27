@@ -20,8 +20,8 @@
         --output TEXT              output file name. If None (default), the output
                                     is 'netdimpdb_id.p'.
         --output_folder TEXT       output folder.  [default: networks]
-        --pdbs_path TEXT           path of folder containing the pdbs within the
-                                    data folder.  [default: pdbs]
+        --pdbs_path TEXT           path of folder containing the pdbs.  [default:
+                                    pdbs]
         --help                     Show this message and exit.
         ```
 
@@ -36,7 +36,7 @@
 
         Options:
         --threshold INTEGER        difference threshold do connect residues in the
-                                    perturbation network  [default: 0]
+                            perturbation network  [default: 0]
         --select_positions TEXT    if True, create a list of sequence positions to
                                     consider (from --start and --stop options)
                                     [default: False]
@@ -50,9 +50,10 @@
                                     the amino acid network.  [default: 5]
         --output TEXT              output file name. If None, the output is
                                     'netdimpdb_id.p'.
-        --output_folder TEXT       output folder. Default is 'networks'.
-        --pdbs_path TEXT           path of folder containing the pdbs within the
-                                    data folder (default is 'pdbs')
+        --output_folder TEXT       output folder. Default is 'networks'.  [default:
+                                    networks]
+        --pdbs_path TEXT           path of folder containing the pdbs.  [default:
+                                    pdbs]
         --help                     Show this message and exit.
         ```
 
@@ -85,14 +86,14 @@
 
     Examples:
     ```console
-    C:\Users\Lorenza\Documents\VMDscript> py network_vmd.py data/pdbs/pdb1f41.ent networks/net1f41.p tcl_files/net1f41.tcl -nc 1
+    C:\Users\Lorenza\Documents\VMDscript> py network_vmd.py pdbs/pdb1f41.ent networks/net1f41.p tcl_files/net1f41.tcl -nc 1
     ```
 
     ```console
-    C:\Users\Lorenza\Documents\VMDscript> py network_vmd.py data/pdbs/pdb3djz.ent networks/pert_net3djz.p tcl_files/pert_net3djz.tcl
+    C:\Users\Lorenza\Documents\VMDscript> py network_vmd.py pdbs/pdb3djz.ent networks/pert_net3djz.p tcl_files/pert_net3djz.tcl
     ```
 
-    NOTE: create_net.py has saved a copy of the pdb file in data/pdbs/
+    NOTE: create_net.py has saved a copy of the pdb file in pdbs/
 
 3. Open the pdb file with VMD.
 
