@@ -41,19 +41,16 @@ for atom in structure.get_atoms():
 with open(args.output, 'w') as output:
         output.write('draw delete all \n')
         if color:
-            output.write('draw color 1 \n')
+            output.write('draw color green \n')
         else:
-            output.write('draw color 6 \n')
+            output.write('draw color red \n')
         previous = None
         for u, v in A.edges():
             if color:
-                red = A.get_edge_data(u, v)['color']=='r'
-                if previous != red:
-                    if not red: 
-                        output.write('draw color 23 \n')
-                    else:
-                        output.write('draw color 1 \n')
-                previous = red    
+                c = A.get_edge_data(u, v)['color']
+                if previous != c:
+                    output.write(f'draw color {c} \n')
+                    previous = c  
                 if args.ntodraw:
                     if u in args.ntodraw and v in args.ntodraw:
                         output.write('draw cylinder { ' + str(node2CA[u]) + ' '+ ' } ' + '{ ' + str(node2CA[v]) + ' '+ ' } radius '+str(A.get_edge_data(u, v)['weight']/div)+' \n')
