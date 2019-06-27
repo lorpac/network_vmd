@@ -27,7 +27,7 @@
 
         Example:
         ```console
-        C:\Users\Lorenza\Documents\VMDscript>py create_net.py 1f41
+        C:\Users\Lorenza\Documents\networks_to_vmd>py create_net.py 1f41
         ```
     - **Perturbation Network:** Run the `create_perturbation_net.py` script:
 
@@ -59,7 +59,7 @@
 
         Example:
         ```console
-        C:\Users\Lorenza\Documents\VMDscript> py .\create_perturbation_net.py 3djz 1f41 --select_positions True --range_positions 11 124  --threshold 4
+        C:\Users\Lorenza\Documents\networks_to_vmd> py .\create_perturbation_net.py 3djz 1f41 --select_positions True --range_positions 11 124  --threshold 4
         ```
 
 2. Run the `network_vmd.py` script:
@@ -86,22 +86,22 @@
 
     Examples:
     ```console
-    C:\Users\Lorenza\Documents\VMDscript> py network_vmd.py pdbs/pdb1f41.ent networks/net1f41.p tcl_files/net1f41.tcl -nc 1
+    C:\Users\Lorenza\Documents\networks_to_vmd> py network_vmd.py pdbs/pdb1f41.ent networks/net1f41.p tcl_files/net1f41.tcl -nc 1
     ```
 
     ```console
-    C:\Users\Lorenza\Documents\VMDscript> py network_vmd.py pdbs/pdb3djz.ent networks/pert_net3djz.p tcl_files/pert_net3djz.tcl
+    C:\Users\Lorenza\Documents\networks_to_vmd> py network_vmd.py pdbs/pdb3djz.ent networks/pert_net3djz.p tcl_files/pert_net3djz.tcl
     ```
 
     NOTE: create_net.py has saved a copy of the pdb file in pdbs/
 
 3. Open the pdb file with VMD.
 
-4. In the Tk console, navigate to your folder and run source output.tcl .
+4. In the Tk console of VMD, navigate to the project folder and run source output.tcl .
 
     Example:
     ```console
     Main console display active (Tcl8.5.6 / Tk8.5.6)
-    (VMD) 1 % cd ../../../Users/Lorenza/Documents/VMDscript/
-    >Main< (VMDscript) 2 % source tcl_files/net1f41.tcl
+    (VMD) 1 % cd ../../../Users/Lorenza/Documents/networks_to_vmd/
+    >Main< (networks_to_vmd) 2 % source tcl_files/net1f41.tcl
     ```
