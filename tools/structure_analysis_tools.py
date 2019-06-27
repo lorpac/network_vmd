@@ -47,20 +47,19 @@ def get_pdb_path(pdb_id, pdbs_path="pdbs"):
     if not pdbs_path:
         pdbs_path = "pdbs"
 
-    abs_path = os.path.join("data", pdbs_path)
-    abs_file_path = os.path.join(abs_path, pdb_id + ".*")
+    abs_file_path = os.path.join(pdbs_path, pdb_id + ".*")
 
     if len(glob.glob(abs_file_path)) == 0:
-        abs_file_path = os.path.join(abs_path, "pdb" + pdb_id + ".*")
+        abs_file_path = os.path.join(pdbs_path, "pdb" + pdb_id + ".*")
         downloaded = True
 
         if len(glob.glob(abs_file_path)) == 0:
             os.makedirs(abs_path, exist_ok=True)
-            download_pdb([pdb_id], abs_path)
+            download_pdb([pdb_id], pdbs_path)
 
         else:
             pdb_id = "pdb" + pdb_id
-            abs_file_path = os.path.join(abs_path, pdb_id + ".*")
+            abs_file_path = os.path.join(pdbs_path, pdb_id + ".*")
     pdb_path = glob.glob(abs_file_path)[0]
 
     return pdb_path, downloaded

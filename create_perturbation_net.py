@@ -45,12 +45,14 @@ import click
     show_default=True
 )
 @click.option(
-    "--output_folder", default="networks", help="output folder. Default is 'networks'."
+    "--output_folder", default="networks", help="output folder. Default is 'networks'.",
+    show_default=True
 )
 @click.option(
     "--pdbs_path",
     default="pdbs",
-    help="path of folder containing the pdbs within the data folder (default is 'pdbs')",
+    help="path of folder containing the pdbs.",
+    show_default=True
 )
 def create_net(
     pdb_id,

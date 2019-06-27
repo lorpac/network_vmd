@@ -44,7 +44,7 @@ import click
 @click.option(
     "--pdbs_path",
     default="pdbs",
-    help="path of folder containing the pdbs within the data folder.",
+    help="path of folder containing the pdbs.",
     show_default=True
 )
 def create_net(
