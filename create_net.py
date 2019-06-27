@@ -1,6 +1,5 @@
 import networkx as nx
-import structure_analysis_tools as sa
-import amino_acids_conversion as aac
+import tools.structure_analysis_tools as sa
 import os
 import click
 
@@ -9,7 +8,7 @@ import click
 @click.argument("pdb_id")
 @click.option(
     "--selected_positions",
-    default="None",
+    default=None,
     help="list of sequence positions to consider. If None, all positions are considered (default is None)",
 )
 @click.option(
@@ -30,14 +29,27 @@ import click
 @click.option(
     "--output_folder", default="networks", help="output folder. Default is 'networks'."
 )
-def create_net(pdb_id, selected_positions, dim, cutoff, output, output_folder):
+@click.option(
+    "--pdbs_path",
+    default="pdbs",
+    help="path of folder containing the pdbs within the data folder (default is 'pdbs')",
+)
+def create_net(
+    pdb_id, selected_positions, dim, cutoff, output, output_folder, pdbs_path
+):
 
     if dim == "all":
         dim = ""
 
     rel_list = sa.list_relations(dim)
 
-    net = sa.create_aa_network(pdb_id, rel_list)
+    net = sa.create_aa_network(
+        pdb_id,
+        rel_list,
+        selected_positions=selected_positions,
+        cutoff=cutoff,
+        pdbs_path=pdbs_path,
+    )
 
     if not output:
         output = dim + "net" + pdb_id + ".p"

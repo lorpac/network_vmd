@@ -15,6 +15,8 @@
     --output TEXT              output file name. If None (default), the output
                                 is 'netdimpdb_id.p'.
     --output_folder TEXT       output folder. Default is 'networks'.
+    --pdbs_path TEXT           path of folder containing the pdbs within the
+                                data folder (default is 'pdbs')
     --help                     Show this message and exit.
     ```
 

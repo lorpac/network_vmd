@@ -5,7 +5,7 @@ import biographs as bg
 import pandas as pd
 import numpy as np
 import pickle
-import amino_acids_conversion as aaconv
+import tools.amino_acids_conversion as aaconv
 import glob
 from biopandas.pdb import PandasPdb
 
@@ -47,8 +47,7 @@ def get_pdb_path(pdb_id, pdbs_path="pdbs"):
     if not pdbs_path:
         pdbs_path = "pdbs"
 
-    package_path = ""
-    abs_path = os.path.join(package_path, "data", pdbs_path)
+    abs_path = os.path.join("data", pdbs_path)
     abs_file_path = os.path.join(abs_path, pdb_id + ".*")
 
     if len(glob.glob(abs_file_path)) == 0:
