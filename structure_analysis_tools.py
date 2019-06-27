@@ -1,12 +1,8 @@
-import sys
 import os
 from Bio.PDB import PDBList
 import networkx as nx
 import biographs as bg
-import csv
 import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
 import numpy as np
 import pickle
 import amino_acids_conversion as aaconv
@@ -341,4 +337,6 @@ def create_aa_network(
                 net.remove_node(node_name)
                 _ = labels.pop(node_name)
 
-    return net, labels
+    nx.relabel_nodes(net, labels, copy=False)
+
+    return net
