@@ -1,3 +1,6 @@
+# adapted from Aria Gheeraert's PerturbationNetworkAnalysis
+# (https://github.com/agheeraert/PerturbationNetworkAnalysis)
+
 import networkx as nx
 import numpy as np
 from Bio.PDB.Polypeptide import aa1, aa3

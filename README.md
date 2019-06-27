@@ -66,7 +66,7 @@
         C:\Users\Lorenza\Documents\network_to_vmd> py .\create_perturbation_net.py 3djz 1f41 --select_positions True --range_positions 11 124  --threshold 4
         ```
 
-2. Run the `network_vmd.py` script:
+2. Run the `network_vmd.py` script (adapted from Aria Gheeraert's [PerturbationNetworkAnalysis](https://github.com/agheeraert/PerturbationNetworkAnalysis)):
 
     ```console
     usage: network_vmd.py [-h] [-nc NC] [-ntodraw NTODRAW [NTODRAW ...]]
