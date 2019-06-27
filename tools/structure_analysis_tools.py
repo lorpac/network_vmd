@@ -119,7 +119,7 @@ def list_relations(dim="all"):
         rel_list = ["1D", "2D2", "2D3", "2D4"]
     elif dim == "3-4D":
         rel_list = ["3D", "4D"]
-    elif dim == "all" or dim == "" :
+    elif dim == "all" or dim == "":
         rel_list = ["1D", "2D2", "2D3", "2D4", "3D", "4D"]
     else:
         rel_list = [dim]
@@ -243,13 +243,7 @@ def get_neighbor_structure_relation(secondary_structure, u, v):
     return relation
 
 
-def create_aa_network(
-    pdb_id,
-    rel_list,
-    selected_positions=None,
-    cutoff=5,
-    pdbs_path="pdbs",
-):
+def create_aa_network(pdb_id, rel_list, selected_positions, cutoff, pdbs_path):
     """Creates the amino acid network from a pdb id.
         
     Parameters
@@ -306,7 +300,7 @@ def create_aa_network(
         res_pos = str(residue.id[1])
         labels[res_chain + res_pos] = f"{res_type}{res_pos}:{res_chain}"
         residues_dict[res_chain + res_pos] = res_type
-    
+
     for residue in mol.model.get_residues():
         node_name = residue.parent.id + str(residue.id[1])
         deg = nx.degree(net, node_name)
@@ -316,8 +310,8 @@ def create_aa_network(
         else:
             seqpos = residue.id[1]
             if seqpos not in selected_positions:
-                net.remove_node(node_name)
                 _ = labels.pop(node_name)
+                continue
             structure = secondary_structure[node_name]
 
             for neighbor in list(nx.neighbors(net, node_name)):
@@ -336,6 +330,67 @@ def create_aa_network(
                 net.remove_node(node_name)
                 _ = labels.pop(node_name)
 
-    nx.relabel_nodes(net, labels, copy=False)
 
-    return net
+    return net, labels
+
+
+def create_perturbation_network(
+    pdb_id, pdb_id_ref, threshold, rel_list, selected_positions, cutoff, pdbs_path
+):
+
+    net1, labels = create_aa_network(
+        pdb_id,
+        rel_list,
+        selected_positions=selected_positions,
+        cutoff=cutoff,
+        pdbs_path=pdbs_path,
+    )
+
+    net2, _ = create_aa_network(
+        pdb_id_ref,
+        rel_list,
+        selected_positions=selected_positions,
+        cutoff=cutoff,
+        pdbs_path=pdbs_path,
+    )
+
+    edges1 = set(net1.edges)
+    edges2 = set(net2.edges)
+    common_edges = edges1.intersection(edges2)
+    edges_1only = edges1.difference(edges2)
+    edges_2only = edges2.difference(edges1)
+
+    net = nx.Graph()
+    edge_colors = {}
+    for u, v in common_edges:
+        wij1 = net1.get_edge_data(u, v)["weight"]
+        wij2 = net2.get_edge_data(u, v)["weight"]
+        deltawij = wij2 - wij1
+        if deltawij > threshold:
+            color = "green"
+            net.add_edge(u, v, weight=abs(deltawij))
+            edge_colors[(u, v)] = color
+        elif deltawij < -threshold:
+            color = "red"
+            net.add_edge(u, v, weight=abs(deltawij))
+            edge_colors[(u, v)] = color
+
+    for u, v in edges_1only:
+        wij = net1.get_edge_data(u, v)["weight"]
+        color = "red"
+        if wij > threshold:
+            net.add_edge(u, v, weight=wij)
+            edge_colors[(u, v)] = color
+
+    for u, v in edges_2only:
+        wij = net2.get_edge_data(u, v)["weight"]
+        color = "green"
+        if wij > threshold:
+            net.add_edge(u, v, weight=wij)
+            edge_colors[(u, v)] = color
+
+    nx.set_edge_attributes(net, edge_colors, "color")
+
+    labels = {node: labels[node] for node in net.nodes}
+
+    return net, labels
