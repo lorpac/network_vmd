@@ -8,33 +8,20 @@ import click
 
 @click.command()
 @click.argument('pdb_id')
+@click.option('--selected_positions', default='None', help="list of sequence positions to consider. If None, all positions are considered (default is None)")
 @click.option('--dim', default='all', help="dimensions to consider (1D, 2D, 3D, 4D, 3-4D, or all). Default is 'all'. ")
+@click.option('--cutoff', default=5, help="cutoff threshold for the connection of nodes in the amino acid network (dafault is 5)")
 @click.option('--output', default=None, help="output file name. If None (default), the output is 'netdimpdb_id.p'.")
 @click.option('--output_folder', default="networks", help="output folder. Default is 'networks'.")
-def create_net(pdb_id, dim, output, output_folder):
+def create_net(pdb_id, selected_positions, dim, cutoff, output, output_folder):
     if dim == "all": dim = ""
     rel_list = sa.list_relations(dim)
-    net, db_1, db_2, mol, downloaded = sa.create_aa_network(
+    net, labels = sa.create_aa_network(
         pdb_id,
-        rel_list,
-        folder_path=None,
-        save_csv=False,
+        rel_list
     )
 
-    node_labels = {}
-
-    for n in net.nodes:
-        info = db_2[db_2["Position"] == n]
-        chain = n[0]
-        pos = n[1::]
-        typeaa = info["Type of residue"].item()
-        typeaa = aac.three2one(typeaa)
-
-        label = f"{typeaa}{pos}:{chain}"
-
-        node_labels[n] = label
-
-    nx.relabel_nodes(net, node_labels, copy=False)
+    nx.relabel_nodes(net, labels, copy=False)
 
     if not output:
         output = dim + "net" + pdb_id + ".p"
