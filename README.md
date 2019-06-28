@@ -1,5 +1,19 @@
 # Visualize amino acid networks in VMD
 
+The following Python packages are required:
+- [biographs](https://github.com/rodogi/biographs)
+- [Biopython](https://biopython.org/wiki/Download)
+- [NetworkX](https://networkx.github.io/)
+- [os](https://docs.python.org/3/library/os.html)
+- [pandas](https://pandas.pydata.org/)
+- [numpy](https://www.numpy.org/)
+- [pickle](https://docs.python.org/3/library/pickle.html)
+- [click](https://click.palletsprojects.com/en/7.x/)
+  
+The results can be visualized with the [VMD software](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD)
+
+## Instructions:
+
 1. - **Amino Acid network:** Run the `create_net.py` script:
 
         ```console
