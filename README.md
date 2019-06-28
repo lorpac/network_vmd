@@ -101,7 +101,7 @@
 
 3. Open the pdb file with VMD.
 
-4. In the Tk console of VMD, navigate to the project folder and run source output.tcl .
+4. In the Tk console of VMD, navigate to the project folder and run `source output.tcl` .
 
     Example:
     ```console
