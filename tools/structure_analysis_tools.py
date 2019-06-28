@@ -54,7 +54,7 @@ def get_pdb_path(pdb_id, pdbs_path="pdbs"):
         downloaded = True
 
         if len(glob.glob(abs_file_path)) == 0:
-            os.makedirs(abs_path, exist_ok=True)
+            os.makedirs(pdbs_path, exist_ok=True)
             download_pdb([pdb_id], pdbs_path)
 
         else:

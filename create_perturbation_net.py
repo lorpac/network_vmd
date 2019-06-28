@@ -108,7 +108,7 @@ def create_net(
     nx.relabel_nodes(net, labels, copy=False)
 
     if not output:
-        output = dim + "pert_net" + pdb_id + ".p"
+        output = dim + "pert_net" + pdb_id + "_" + str(threshold) + ".p"
 
     os.makedirs(output_folder, exist_ok=True)
 

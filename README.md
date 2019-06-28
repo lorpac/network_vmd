@@ -94,7 +94,7 @@
     ```
 
     ```console
-    C:\Users\Lorenza\Documents\network_to_vmd> py network_vmd.py pdbs/pdb3djz.ent networks/pert_net3djz.p tcl_files/pert_net3djz.tcl
+    C:\Users\Lorenza\Documents\network_to_vmd> py network_vmd.py pdbs/pdb3djz.ent networks/pert_net3djz_4.p tcl_files/pert_net3djz_4.tcl
     ```
 
     NOTE: create_net.py has saved a copy of the pdb file in pdbs/
