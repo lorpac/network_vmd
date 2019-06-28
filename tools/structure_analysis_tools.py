@@ -338,16 +338,16 @@ def create_perturbation_network(
     color_positive_edge
 ):
 
-    net1, labels = create_aa_network(
-        pdb_id,
+    net1, _ = create_aa_network(
+        pdb_id_ref,
         rel_list,
         selected_positions=selected_positions,
         cutoff=cutoff,
         pdbs_path=pdbs_path,
     )
 
-    net2, _ = create_aa_network(
-        pdb_id_ref,
+    net2, labels = create_aa_network(
+        pdb_id,
         rel_list,
         selected_positions=selected_positions,
         cutoff=cutoff,
