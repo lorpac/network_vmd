@@ -4,3 +4,6 @@ networks
 tcl_files
 pdbs
 vmd_visualization
+tools/__init__.pyc
+tools/__pycache__
+figures
