@@ -9,7 +9,7 @@ The following Python packages are required:
 - [numpy](https://www.numpy.org/)
 - [pickle](https://docs.python.org/3/library/pickle.html)
 - [click](https://click.palletsprojects.com/en/7.x/)
-  
+
 The results can be visualized with the [VMD software](https://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD)
 
 ## Instructions:
@@ -96,10 +96,12 @@ The results can be visualized with the [VMD software](https://www.ks.uiuc.edu/De
 
     optional arguments:
     -h, --help            show this help message and exit
-    -nc NC                the network has no edge color attribute
+    -nc 0 or 1                the network has no edge color attribute
     -ntodraw NTODRAW [NTODRAW ...]
                             draw only a list of nodes
     -norm NORM            changes the normalizaton factor
+    -weighted            use edge weights for thickness
+    -color                     color (ignored if -nc = False, default: red)
     ```
 
     Examples:
