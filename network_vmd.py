@@ -23,6 +23,8 @@ parser.add_argument('-weighted',  action='store_true', default=False,
                     help='use edge weights')
 parser.add_argument('-ntodraw', type=str, nargs='+', default=None,
                     help="draw only a list of nodes")
+parser.add_argument('-neighborhood', type=str, default=None,
+                    help="draw neighborhood of the node")
 parser.add_argument('-norm', type=float, default=1.5,
                     help="changes the normalizaton factor")
 parser.add_argument('-color', type=str, default='red',
@@ -83,6 +85,13 @@ with open(args.output, 'w') as output:
                             output.write('draw cylinder { ' + str(node2CA[u]) + ' '+ ' } ' + '{ ' + str(node2CA[v]) + ' '+ ' } radius '+str(A.get_edge_data(u, v)['weight']/div)+' \n')
                         else:
                             output.write('draw cylinder { ' + str(node2CA[u]) + ' '+ ' } ' + '{ ' + str(node2CA[v]) + ' '+ ' } radius '+str(0.5)+' \n')
+                elif args.neighborhood:
+                    if u == args.neighborhood or v == args.neighborhood:
+                        if args.weighted:
+                            output.write('draw cylinder { ' + str(node2CA[u]) + ' '+ ' } ' + '{ ' + str(node2CA[v]) + ' '+ ' } radius '+str(A.get_edge_data(u, v)['weight']/div)+' \n')
+                        else:
+                            output.write('draw cylinder { ' + str(node2CA[u]) + ' '+ ' } ' + '{ ' + str(node2CA[v]) + ' '+ ' } radius '+str(0.5)+' \n')
+
                 else:
                     if args.weighted:
                         output.write('draw cylinder { ' + str(node2CA[u]) + ' '+ ' } ' + '{ ' + str(node2CA[v]) + ' '+ ' } radius '+str(A.get_edge_data(u, v)['weight']/div)+' \n')
@@ -94,6 +103,9 @@ with open(args.output, 'w') as output:
         for u in A.nodes():
             if ntodraw:
                 if u in ntodraw[1:-2]:
+                    output.write('draw sphere { ' + str(node2CA[u]) + ' '+ ' } radius '+str(args.norm)+' \n')
+            elif args.neighborhood:
+                if u == args.neighborhood or u in A.neighbors(u):
                     output.write('draw sphere { ' + str(node2CA[u]) + ' '+ ' } radius '+str(args.norm)+' \n')
             else:
                 output.write('draw sphere { ' + str(node2CA[u]) + ' '+ ' } radius '+str(args.norm)+' \n')
